@@ -11,14 +11,14 @@ Main agent responsibilities:
 - Decide whether the request triggers Build Web Apps.
 - Read the relevant Build Web Apps skill before acting.
 - Keep design approval, implementation scope, browser evidence, and final acceptance in one thread.
-- Delegate only bounded edits or focused reviews after the Build Web Apps loop has a clear work order or evidence set.
+- Delegate bounded edits or focused reviews after the Build Web Apps loop has a clear work order or evidence set.
 - Merge reviewer findings into the final decision gate.
 
 ## Routing
 
 | Request shape | Build Web Apps skill | Local frontend-agents role |
 | --- | --- | --- |
-| New app, dashboard, game, creative site, hero, redesign, modernization | `build-web-apps:frontend-app-builder` | Main agent drives Image Gen concepting, implementation, Browser/IAB validation, fidelity ledger, then uses reviewers as needed. |
+| New app, dashboard, game, creative site, hero, redesign, modernization | `build-web-apps:frontend-app-builder` | Main agent drives Image Gen concepting, implementation, Browser/IAB validation, fidelity ledger, then uses the relevant configured reviewers before acceptance or records skip reasons. |
 | Rendered UI bug, interaction failure, visual regression, console/runtime issue, responsive breakage | `build-web-apps:frontend-testing-debugging` | Main agent defines the target flow and validates Browser-first; reviewers can inspect accessibility, polish, or performance evidence. |
 | React/Next component work or performance-sensitive refactor | `build-web-apps:react-best-practices` | React reviewer checks local code against the same rule families; Vite/perf reviewer checks bundle and runtime risk. |
 | shadcn/ui component creation, registry usage, presets, component composition | `build-web-apps:shadcn` | shadcn reviewer verifies CLI usage, registry evidence, composition, tokens, forms, dialogs, and component ownership. |
@@ -47,15 +47,17 @@ Use subagents after the main agent has enough context to write a bounded assignm
 - `vite-performance-reviewer`: review build output, large imports, waterfalls, console/network evidence, and bundle risk.
 - `design-polish-reviewer`: review rendered visual quality and responsive behavior, but do not replace the Build Web Apps concept-to-screenshot fidelity gate.
 
-## When Not To Delegate
+## When To Keep A Step In The Main Thread
 
-Keep the work in the main agent when:
+Keep a step in the main agent when:
 
 - The task is still in concept approval or design-selection mode.
 - Browser/IAB setup, screenshots, console logs, and final acceptance evidence are the core work.
-- The change is small enough that subagent setup would cost more than direct inspection.
+- The change is small enough that one focused subagent interaction is enough.
 - Multiple agents would need to edit the same files without clear ownership.
 - The issue is a provider-routing decision, such as Stripe API selection or Supabase schema/query guidance.
+
+This does not remove the production workflow's orchestrator requirement. Once the target flow, work order, or evidence set is clear, the main agent should still interact with the relevant configured editor or reviewer subagent before final acceptance, or state why no subagent role was available.
 
 ## Final Acceptance
 
