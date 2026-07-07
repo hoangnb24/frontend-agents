@@ -1,0 +1,36 @@
+{
+  "name": "frontend-agents",
+  "version": "0.1.0",
+  "description": "Production React, Vite, shadcn/ui frontend workflow skills and adoption materials for Codex.",
+  "author": {
+    "name": "Local developer"
+  },
+  "license": "UNLICENSED",
+  "keywords": [
+    "frontend",
+    "react",
+    "vite",
+    "shadcn",
+    "codex",
+    "subagents",
+    "accessibility"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Frontend Agents",
+    "shortDescription": "Codex workflow for production React/Vite/shadcn frontend work.",
+    "longDescription": "Frontend Agents packages narrow Codex skills, custom agent templates, review gates, adoption docs, and validation scripts for production React, Vite, TypeScript, Tailwind, and shadcn/ui frontend work. It uses one accountable orchestrator, one bounded editor, and specialist read-only reviewers with decision-based gates.",
+    "developerName": "Local developer",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use frontend-production-workflow for this UI change.",
+      "Review this React/Vite/shadcn diff with frontend agents.",
+      "Adopt the frontend-agents workflow in this project."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

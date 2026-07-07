@@ -1,0 +1,20 @@
+{
+  "name": "frontend-agents-local",
+  "interface": {
+    "displayName": "Frontend Agents Local"
+  },
+  "plugins": [
+    {
+      "name": "frontend-agents",
+      "source": {
+        "source": "local",
+        "path": "./plugins/frontend-agents"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
